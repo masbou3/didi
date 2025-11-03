@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Ghassen Kahouli - CV</title>
+    <style>
+        /* RESET */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #fff5f5 0%, #f0f8ff 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* BOUTON LANGUE */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .lang-btn {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(44, 62, 80, 0.2);
+        }
+
+        .lang-btn:hover {
+            background: #34495e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(44, 62, 80, 0.3);
+        }
+
+        /* LAYOUT PRINCIPAL */
+        .cv-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            background: white;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        /* EN-TÊTE */
+        .header {
+            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+            color: white;
+            padding: 50px 50px 40px 50px;
+            position: relative;
+            text-align: center;
+        }
+
+        .profile-image-container {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 25px;
+            border-radius: 8px;
+            border: 4px solid rgba(255,255,255,0.3);
+            overflow: hidden;
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-placeholder {
+            color: white;
+            font-size: 0.9em;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .name {
+            font-size: 2.8em;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .title {
+            font-size: 1.3em;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        /* CONTENU PRINCIPAL - 2 COLONNES */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 0;
+        }
+
+        /* COLONNE GAUCHE */
+        .left-column {
+            background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 40px 30px;
+            border-right: 1px solid #dee2e6;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #495057;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 8px;
+        }
+
+        .contact-item {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .languages-list li {
+            margin-bottom: 8px;
+            list-style: none;
+        }
+
+        .skill-bar {
+            background: #dee2e6;
+            height: 4px;
+            border-radius: 2px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .skill-level {
+            height: 100%;
+            background: linear-gradient(90deg, #e74c3c, #3498db);
+            border-radius: 2px;
+        }
+
+        /* COLONNE DROITE */
+        .right-column {
+            padding: 40px 50px;
+            background: #ffffff;
+        }
+
+        .experience-item {
+            margin-bottom: 35px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #e74c3c;
+            transition: transform 0.3s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateX(5px);
+        }
+
+        .date {
+            color: #6c757d;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .position {
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+
+        .company {
+            color: #6c757d;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .description {
+            color: #495057;
+            line-height: 1.5;
+        }
+
+        /* SPÉCIALITÉS */
+        .specialties {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .specialty {
+            background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+            padding: 12px 8px;
+            font-size: 0.9em;
+            text-align: center;
+            border-radius: 8px;
+            border: 1px solid #fd79a8;
+            font-weight: 500;
+            color: #2d3436;
+            transition: transform 0.3s ease;
+        }
+
+        .specialty:hover {
+            transform: translateY(-2px);
+        }
+
+        /* FORMATIONS */
+        .education-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #27ae60;
+            transition: transform 0.3s ease;
+        }
+
+        .education-item:hover {
+            transform: translateX(5px);
+        }
+
+        .degree {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+
+        .honors {
+            color: #27ae60;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        /* LIGNES VERTICALES POUR TIMELINE */
+        .timeline {
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: -25px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #e74c3c, #3498db);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .left-column {
+                border-right: none;
+                border-bottom: 1px solid #dee2e6;
+            }
+            
+            .language-switcher {
+                position: relative;
+                top: 0;
+                right: 0;
+                text-align: center;
+                margin: 20px;
+            }
+            
+            body {
+                background: linear-gradient(135deg, #fff5f5 0%, #f0f8ff 100%);
+                padding: 10px;
+            }
+
+            .header {
+                padding: 40px 20px;
+            }
+
+            .name {
+                font-size: 2.2em;
+            }
+
+            .profile-image-container {
+                width: 180px;
+                height: 180px;
+            }
+        }
+
+        /* Animation subtile */
+        .cv-container {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- BOUTON DE CHANGEMENT DE LANGUE -->
+    <div class="language-switcher">
+        <button class="lang-btn" onclick="toggleLanguage()">🌐 English Version</button>
+    </div>
+
+    <div class="cv-container">
+        <!-- EN-TÊTE AVEC PHOTO -->
+        <div class="header">
+            <div class="profile-image-container">
+                <!-- REMPLACEZ L'URL CI-DESSOUS PAR VOTRE IMAGE EXTERNE -->
+                <img src="Image1.png" 
+                     alt="Photo du Dr. Ghassen Kahouli" 
+                     class="profile-image"
+                     onerror="this.style.display='none'; document.getElementById('imagePlaceholder').style.display='block'">
+                <div id="imagePlaceholder" class="image-placeholder" style="display: none;">
+                    📷<br>Photo<br>Professionnelle
+                </div>
+            </div>
+            <h1 class="name">Dr. Ghassen Kahouli</h1>
+            <p class="title">Chirurgien-Dentiste | Praticien Libéral depuis 2013</p>
+        </div>
+
+        <!-- CONTENU PRINCIPAL -->
+        <div class="main-content">
+            <!-- COLONNE GAUCHE -->
+            <div class="left-column">
+                <!-- CONTACT -->
+                <div class="section">
+                    <h3 class="section-title">Contact</h3>
+                    <div class="contact-item">
+                        <span>📍</span>
+                        <div>97 Rue Jawdat Alhayet<br>Chotrana 1, La Soukra<br>Ariana, Tunisie</div>
+                    </div>
+                    <div class="contact-item">
+                        <span>📞</span>
+                        <div>+216 29 400 707</div>
+                    </div>
+                    <div class="contact-item">
+                        <span>✉️</span>
+                        <div>ghassenkahouli@gmail.com</div>
+                    </div>
+                </div>
+
+                <!-- LANGUES -->
+                <div class="section">
+                    <h3 class="section-title">Langues</h3>
+                    <ul class="languages-list">
+                        <li>
+                            Arabe - Natif
+                            <div class="skill-bar"><div class="skill-level" style="width: 100%"></div></div>
+                        </li>
+                        <li>
+                            Français - Avancé
+                            <div class="skill-bar"><div class="skill-level" style="width: 90%"></div></div>
+                        </li>
+                        <li>
+                            Anglais - Intermédiaire
+                            <div class="skill-bar"><div class="skill-level" style="width: 70%"></div></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- COMPÉTENCES -->
+                <div class="section">
+                    <h3 class="section-title">Compétences</h3>
+                    <ul class="languages-list">
+                        <li>Logiciels de gestion de cabinet</li>
+                        <li>Suite Microsoft Office</li>
+                        <li>Dentisterie numérique</li>
+                        <li>Photographie dentaire</li>
+                    </ul>
+                </div>
+
+                <!-- CENTRES D'INTÉRÊT -->
+                <div class="section">
+                    <h3 class="section-title">Centres d'intérêt</h3>
+                    <div>Technologie • Culture • Management</div>
+                </div>
+            </div>
+
+            <!-- COLONNE DROITE -->
+            <div class="right-column">
+                <!-- PROFIL -->
+                <div class="section">
+                    <h3 class="section-title">Profil Professionnel</h3>
+                    <p>Praticien libéral depuis 2013 dans mon propre cabinet basé à Tunis. Pratique en tant que généraliste spécialisé dans les domaines suivants :</p>
+                    
+                    <div class="specialties">
+                        <div class="specialty">Dentisterie Conservatrice</div>
+                        <div class="specialty">Endodontie</div>
+                        <div class="specialty">Prothèses Dentaires</div>
+                        <div class="specialty">Dentisterie Esthétique</div>
+                        <div class="specialty">Soins Parodontaux</div>
+                        <div class="specialty">Implantologie</div>
+                    </div>
+                </div>
+
+                <!-- FORMATION -->
+                <div class="section">
+                    <h3 class="section-title">Formation</h3>
+                    <div class="education-item">
+                        <div class="date">2005 - 2010</div>
+                        <div class="degree">Doctorat en Chirurgie Dentaire (DDS)</div>
+                        <div class="company">Faculté de Médecine Dentaire de Monastir, Tunisie</div>
+                        <div class="honors">Mention Très Honorable avec Félicitations du Jury</div>
+                    </div>
+                    <div class="education-item">
+                        <div class="date">2005</div>
+                        <div class="degree">Baccalauréat en Mathématiques</div>
+                        <div class="company">Lycée Hédi Chaker, Sfax</div>
+                        <div class="honors">Mention Très Bien</div>
+                    </div>
+                </div>
+
+                <!-- FORMATIONS CONTINUES -->
+                <div class="section timeline">
+                    <h3 class="section-title">Formations Continues</h3>
+                    
+                    <div class="experience-item">
+                        <div class="date">2023</div>
+                        <div class="position">Perfectionnement Avancé</div>
+                        <div class="description">Table ronde "Chirurgie Implantaire Guidée", ateliers de photographie dentaire, chirurgie implantaire guidée, mock-up et préparation pour facettes céramiques</div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="date">2020</div>
+                        <div class="position">Expertise Médicale & Digital</div>
+                        <div class="description">Atelier d'expertise médicale, introduction à l'implantologie et dentisterie numérique</div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="date">2016</div>
+                        <div class="position">Gestion & Stérilisation</div>
+                        <div class="description">Formation professionnelle sur la stérilisation et gestion de cabinet dentaire</div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="date">2014</div>
+                        <div class="position">Technologies Laser & Implantologie</div>
+                        <div class="description">Applications du laser diode en pratique courante et implantologie pratique</div>
+                    </div>
+                </div>
+
+                <!-- ENGAGEMENT -->
+                <div class="section">
+                    <h3 class="section-title">Engagement Associatif</h3>
+                    
+                    <div class="experience-item">
+                        <div class="date">2014</div>
+                        <div class="position">Co-fondateur & Vice-Trésorier</div>
+                        <div class="company">ATMD - Association Tunisienne des Médecins Dentistes</div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="date">2011</div>
+                        <div class="position">Co-fondateur</div>
+                        <div class="company">TADS - Tunisian Association of Dental Students</div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="date">2007-2011</div>
+                        <div class="position">Membre Actif & Trésorier</div>
+                        <div class="company">LEO Club Kuriat Monastir</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isEnglish = false;
+
+        function toggleLanguage() {
+            isEnglish = !isEnglish;
+            updateLanguage();
+        }
+
+        function updateLanguage() {
+            const button = document.querySelector('.lang-btn');
+            
+            if (isEnglish) {
+                // Traduction en anglais
+                button.textContent = '🌐 Version Française';
+                
+                // En-tête
+                document.querySelector('.title').textContent = 'Dentist | Private Practitioner since 2013';
+                
+                // Sections
+                document.querySelectorAll('.section-title')[0].textContent = 'Contact';
+                document.querySelectorAll('.section-title')[1].textContent = 'Languages';
+                document.querySelectorAll('.section-title')[2].textContent = 'Skills';
+                document.querySelectorAll('.section-title')[3].textContent = 'Interests';
+                document.querySelectorAll('.section-title')[4].textContent = 'Professional Profile';
+                document.querySelectorAll('.section-title')[5].textContent = 'Education';
+                document.querySelectorAll('.section-title')[6].textContent = 'Continuing Education';
+                document.querySelectorAll('.section-title')[7].textContent = 'Associative Engagement';
+
+                // Profil professionnel
+                document.querySelector('.right-column .section p').textContent = 'Private practitioner since 2013 in my own practice based in Tunis. Working as a general practitioner specializing in the following areas:';
+                
+                // Spécialités
+                const specialties = document.querySelectorAll('.specialty');
+                const englishSpecialties = [
+                    'Conservative Dentistry',
+                    'Endodontics',
+                    'Dental Prosthetics',
+                    'Aesthetic Dentistry',
+                    'Periodontal Care',
+                    'Implantology'
+                ];
+                specialties.forEach((spec, index) => {
+                    spec.textContent = englishSpecialties[index];
+                });
+
+                // Formation
+                document.querySelectorAll('.degree')[0].textContent = 'Doctorate in Dental Surgery (DDS)';
+                document.querySelectorAll('.company')[0].textContent = 'Faculty of Dental Medicine, Monastir, Tunisia';
+                document.querySelectorAll('.honors')[0].textContent = 'High Honors with Jury Congratulations';
+                
+                document.querySelectorAll('.degree')[1].textContent = 'Baccalaureate in Mathematics';
+                document.querySelectorAll('.company')[1].textContent = 'Hedi Chaker Secondary School, Sfax';
+                document.querySelectorAll('.honors')[1].textContent = 'High Distinction';
+
+                // Formations continues
+                document.querySelectorAll('.position')[0].textContent = 'Advanced Training';
+                document.querySelectorAll('.description')[0].textContent = 'Round table: "Guided Implant Surgery", Workshops: Dental Photography, Guided Implant Surgery, Mock-up / Tooth Preparation for Ceramic Veneers';
+                
+                document.querySelectorAll('.position')[1].textContent = 'Medical Expertise & Digital';
+                document.querySelectorAll('.description')[1].textContent = 'Medical Expertise Workshop, Workshops: Introduction to Implantology, Digital Dentistry';
+                
+                document.querySelectorAll('.position')[2].textContent = 'Management & Sterilization';
+                document.querySelectorAll('.description')[2].textContent = 'Professional training on Sterilization & Dental Office Management';
+                
+                document.querySelectorAll('.position')[3].textContent = 'Laser Technologies & Implantology';
+                document.querySelectorAll('.description')[3].textContent = 'Dental Diode Laser Applications in General Practice, Practical Implantology';
+
+                // Engagement associatif
+                document.querySelectorAll('.position')[4].textContent = 'Co-founder & Vice-Treasurer';
+                document.querySelectorAll('.company')[4].textContent = 'ATMD (Tunisian Association of Dental Doctors)';
+                
+                document.querySelectorAll('.position')[5].textContent = 'Co-founder';
+                document.querySelectorAll('.company')[5].textContent = 'TADS (Tunisian Association of Dental Students)';
+                
+                document.querySelectorAll('.position')[6].textContent = 'Active Member & Treasurer';
+                document.querySelectorAll('.company')[6].textContent = 'LEO Club Kuriat Monastir';
+
+                // Compétences
+                const skills = document.querySelectorAll('.languages-list li');
+                skills[0].childNodes[0].textContent = 'Dental office management software';
+                skills[1].childNodes[0].textContent = 'Microsoft Office Suite';
+                skills[2].childNodes[0].textContent = 'Digital dentistry';
+                skills[3].childNodes[0].textContent = 'Dental photography';
+
+                // Centres d'intérêt
+                document.querySelector('.left-column .section:last-child div').textContent = 'Technology • Culture • Management';
+
+            } else {
+                // Retour en français
+                button.textContent = '🌐 English Version';
+                
+                // Rétablir le texte original en français
+                location.reload();
+            }
+        }
+
+        // Instructions pour ajouter votre image
+        function addExternalImage() {
+            // REMPLACEZ L'URL DANS LA BALISE IMG PAR VOTRE PROPRE URL D'IMAGE
+            // Exemple: 
+            // document.querySelector('.profile-image').src = "https://www.votresite.com/votre-photo.jpg";
+        }
+
+        // Appeler cette fonction pour changer l'image
+        addExternalImage();
+    </script>
+</body>
+</html>
